@@ -3,6 +3,7 @@ package cn.edu.bupt.dao.timeseries;
 import cn.edu.bupt.dao.Cassandra.CassandraAbstractAsyncDao;
 import cn.edu.bupt.dao.ModelConstants;
 import cn.edu.bupt.pojo.kv.*;
+import cn.edu.bupt.pojo.kv.DataType;
 import com.datastax.driver.core.*;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
