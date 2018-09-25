@@ -12,8 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
 @ComponentScan({"cn.edu.bupt", "cn.edu.bupt.websocket"})
-@PropertySource({"classpath:disconf.properties"})
-@ImportResource({"classpath:disconf.xml"})//引入disconf
 public class Application {
     public static void main(String[] args){
         SpringApplication.run(Application.class,args);

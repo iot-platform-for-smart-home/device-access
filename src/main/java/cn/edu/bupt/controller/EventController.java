@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class EventController extends BaseController {
 
     //通过ID查找事件
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/event/{tenantId}/{deviceId}", method = RequestMethod.GET)
     public TimePageData<Event> getEventById(@PathVariable("deviceId") String deviceId,
                                             @PathVariable("tenantId") Integer tenantId,
@@ -36,7 +36,7 @@ public class EventController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/event/newest/{tenantId}/{deviceId}", method = RequestMethod.GET)
     public TimePageData<Event> getEventById(@PathVariable("deviceId") String deviceId,
                                             @PathVariable("tenantId") Integer tenantId,

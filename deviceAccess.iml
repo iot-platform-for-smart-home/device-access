@@ -127,13 +127,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-websocket:4.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: com.baidu.disconf:disconf-client:2.6.36" level="project" />
-    <orderEntry type="library" name="Maven: com.baidu.disconf:disconf-core:2.6.36" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.6" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:1.4" level="project" />
-    <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.9-RC1" level="project" />
-    <orderEntry type="library" name="Maven: org.aspectj:aspectjtools:1.8.9" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:1.4.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.2.0.RELEASE" level="project" />

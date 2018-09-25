@@ -1,8 +1,11 @@
+/*
 package cn.edu.bupt.security.model;
 
+*/
 /**
  * Created by CZX on 2018/5/23.
- */
+ *//*
+
 public class Token {
 
     private String access_token;
@@ -30,3 +33,4 @@ public class Token {
     }
 
 }
+*/

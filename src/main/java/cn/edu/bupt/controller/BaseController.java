@@ -2,7 +2,7 @@ package cn.edu.bupt.controller;
 
 import cn.edu.bupt.actor.service.DefaultActorService;
 import cn.edu.bupt.dao.exception.*;
-import cn.edu.bupt.security.model.SecurityUser;
+//import cn.edu.bupt.security.model.SecurityUser;
 import cn.edu.bupt.service.*;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
@@ -71,14 +71,14 @@ public class BaseController {
         }
     }
 
-    protected SecurityUser getCurrentUser() throws IOTException {
+    /*protected SecurityUser getCurrentUser() throws IOTException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             return (SecurityUser) authentication.getPrincipal();
         } else {
             throw new IOTException("You aren't authorized to perform this operation!", IOTErrorCode.AUTHENTICATION);
         }
-    }
+    }*/
 
     UUID toUUID(String id) {
         if(id==null) {

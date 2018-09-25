@@ -1,3 +1,4 @@
+/*
 
 package cn.edu.bupt.security.model;
 
@@ -108,3 +109,4 @@ public class SecurityUser implements Serializable {
         return sb.toString();
     }
 }
+*/

@@ -17,7 +17,7 @@ cassandra:
   # keyspace name
   keyspace_name: "${CASSANDRA_KEYSPACE_NAME:BUPT_IOT}"
   # URL
-  contactpoints: "${CASSANDRA_CONTACTPOINTS:39.104.165.155}"
+  contactpoints: "${CASSANDRA_CONTACTPOINTS:10.108.218.225}"
   port: "${CASSANDRA_PORT:9042}"
   # Enable/disable secure connection
   ssl: "${CASSANDRA_USE_SSL:false}"
@@ -60,19 +60,19 @@ cassandra:
 
 spring:
   datasource:
-    url: jdbc:mysql://39.104.165.155:3306/BUPT_IOT
+    url: jdbc:mysql://10.108.218.108:3306/BUPT_IOT
     username: root
-    password: root
+    password: 123
 
-account:
-  host: account
-  port: 8400
-  check_url: http://account:8400/api/v1/account/check_token
-  login_url: http://account:8400/api/v1/account/login
-  client_id: client_2
-  client_secret: 123456
-  internal_client_id: client_1
-  internal_client_secret: 123456
+#account:
+#  host: account
+#  port: 8400
+#  check_url: http://account:8400/api/v1/account/check_token
+#  login_url: http://account:8400/api/v1/account/login
+#  client_id: client_2
+#  client_secret: 123456
+#  internal_client_id: client_1
+#  internal_client_secret: 123456
 
 security:
   basic:

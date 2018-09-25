@@ -1,3 +1,4 @@
+/*
 package cn.edu.bupt.security.model;
 
 public enum Authority {
@@ -29,3 +30,4 @@ public enum Authority {
         return authority;
     }
 }
+*/

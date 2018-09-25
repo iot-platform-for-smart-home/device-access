@@ -1,7 +1,7 @@
 package cn.edu.bupt.websocket;
 
 import cn.edu.bupt.pojo.Device;
-import cn.edu.bupt.security.HttpUtil;
+//import cn.edu.bupt.security.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -158,8 +158,8 @@ public class WebSocketServer{
         Request.Builder builder = new Request.Builder()
                 .url("http://39.104.189.84:30080/api/v1/deviceaccess/data/alllatestdata/"+deviceId);
 
-        String token = HttpUtil.getAccessToken();
-        builder.header("Authorization","Bearer "+token);
+//        String token = HttpUtil.getAccessToken();
+//        builder.header("Authorization","Bearer "+token);
 
         Request request = builder.build();
 
@@ -187,8 +187,8 @@ public class WebSocketServer{
         Request.Builder builder = new Request.Builder()
                 .url("http://39.104.189.84:30080/api/v1/deviceaccess/device/"+deviceId);
 
-        String token = HttpUtil.getAccessToken();
-        builder.header("Authorization","Bearer "+token);
+//        String token = HttpUtil.getAccessToken();
+//        builder.header("Authorization","Bearer "+token);
 
         Request request = builder.build();
 

@@ -1,3 +1,4 @@
+/*
 package cn.edu.bupt.security;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,9 +11,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
+*/
 /**
  * Created by CZX on 2018/5/4.
- */
+ *//*
+
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
@@ -75,3 +78,4 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         resources.tokenServices(resourceServerTokenServices);
     }
 }
+*/
