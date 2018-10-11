@@ -7,7 +7,7 @@ import cn.edu.bupt.dao.page.TextPageData;
 import cn.edu.bupt.dao.page.TextPageLink;
 import cn.edu.bupt.message.BasicFromServerMsg;
 import cn.edu.bupt.pojo.Device;
-import cn.edu.bupt.security.model.Authority;
+//import cn.edu.bupt.security.model.Authority;
 import cn.edu.bupt.utils.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonArray;
@@ -33,30 +33,30 @@ public class DeviceController extends BaseController {
 
     public static final String DEVICE_ID = "deviceId";
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/tenant/deviceCount", method = RequestMethod.GET)
     public Long getTenantDeviceCount(@RequestParam Integer tenantId)  {
         return deviceService.findDevicesCount(tenantId);
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('CUSTOMER_USER')")
     @RequestMapping(value = "/customer/deviceCount", method = RequestMethod.GET)
     public Long getCustomerDeviceCount(@RequestParam Integer tenantId,@RequestParam Integer customerId) throws IOTException {
-        try {
-            if (getCurrentUser().getCustomerId().equals(customerId)||
-                    ((getCurrentUser().getAuthority().equals(Authority.TENANT_ADMIN))&&getCurrentUser().getTenantId().equals(tenantId))) {
+//        try {
+//            if (getCurrentUser().getCustomerId().equals(customerId)||
+//                    ((getCurrentUser().getAuthority().equals(Authority.TENANT_ADMIN))&&getCurrentUser().getTenantId().equals(tenantId))) {
                 return deviceService.findCustomerDevicesCount(customerId);
-            }else{
-                throw new IOTException("You aren't authorized to perform this operation!", IOTErrorCode.AUTHENTICATION);
-            }
-        }catch(Exception e){
-            throw handleException(e);
-        }
+//            }else{
+//                throw new IOTException("You aren't authorized to perform this operation!", IOTErrorCode.AUTHENTICATION);
+//            }
+//        }catch(Exception e){
+//            throw handleException(e);
+//        }
     }
 
     //对设备的操作
     //创建设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/device", method = RequestMethod.POST)
     public String saveDevice(@RequestBody String device)  {
         try {
@@ -74,7 +74,7 @@ public class DeviceController extends BaseController {
     }
 
     //改变设备站点ID
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/device", method = RequestMethod.PUT)
     public String updateDeviceSiteId(@RequestBody String device)  {
         try {
@@ -89,7 +89,7 @@ public class DeviceController extends BaseController {
     }
 
     //删除设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/device/{deviceId}", method = RequestMethod.DELETE)
     public void deleteDevice(@PathVariable(DEVICE_ID) String strDeviceId) throws Exception {
         if (StringUtil.isEmpty(strDeviceId)) {
@@ -108,7 +108,7 @@ public class DeviceController extends BaseController {
 
 
     //通过设备ID查找设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/device/{deviceId}", method = RequestMethod.GET)
     public Device getDeviceById(@PathVariable(DEVICE_ID) String strDeviceId) throws Exception {
         if (StringUtil.isEmpty(strDeviceId)) {
@@ -124,7 +124,7 @@ public class DeviceController extends BaseController {
     }
 
     //通过父设备ID查找设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/parentdevices/{parentdeviceId}",params = {"limit"}, method = RequestMethod.GET)
     public List<Device> getDevicesByParentDeviceId(
             @PathVariable("parentdeviceId") String parentDeviceId,
@@ -142,7 +142,7 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/tenant/devices/SearchCount/{tenantId}", method = RequestMethod.GET)
     public Long getTenantDevicesCountByTextSearch(
             @PathVariable("tenantId") Integer tenantId,
@@ -158,7 +158,7 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('CUSTOMER_USER')")
     @RequestMapping(value = "/customerdevices/SearchCount/{tenantId}/{customerId}", method = RequestMethod.GET)
     public Long getCustomerDevicesCountByTextSearch(
             @PathVariable("tenantId") Integer tenantId,
@@ -175,7 +175,7 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/tenant/devices/{tenantId}", params = {"limit"}, method = RequestMethod.GET)
     public TextPageData<Device> getTenantDevicesCount(
             @PathVariable("tenantId") Integer tenantId,
@@ -198,7 +198,7 @@ public class DeviceController extends BaseController {
     }
 
     //删除tenant下的所有设备
-    @PreAuthorize("#oauth2.hasScope('all')")
+    //@PreAuthorize("#oauth2.hasScope('all')")
     @RequestMapping(value = "/devices/{tenantId}", method = RequestMethod.DELETE)
     public void deleteDevicesByTenantId(@PathVariable("tenantId") Integer tenantId) throws Exception {
         try {
@@ -210,7 +210,7 @@ public class DeviceController extends BaseController {
     }
 
     //通过tenantID和Name查找设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value="/device/{tenantId}/{name}",method = RequestMethod.GET)
     public Optional<Device> getDeviceByTenantIdAndName(@PathVariable("tenantId") Integer tenantId,
                                                        @PathVariable("name") String name) throws Exception{
@@ -226,7 +226,7 @@ public class DeviceController extends BaseController {
 
     //customer层面的设备操作
     //分配设备给客户
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value="/assign/customer/{deviceId}/{customerId}",method = RequestMethod.GET)
     public Device assignDeviceToCustomer(@PathVariable("deviceId") String deviceId,
                                          @PathVariable("customerId")Integer customerId) throws Exception{
@@ -241,7 +241,7 @@ public class DeviceController extends BaseController {
     }
 
     //取消分配某个设备给客户
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value="/unassign/customer/{deviceId}",method = RequestMethod.DELETE)
     public Device unassignDeviceFromCustomer(@PathVariable("deviceId")String deviceId) throws Exception{
         try{
@@ -254,7 +254,7 @@ public class DeviceController extends BaseController {
     }
 
     //取消分配客户的所有设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/unassign/{tenantId}/{customerId}",method = RequestMethod.DELETE)
     public void unassignCustomerDevices(@PathVariable("tenantId") Integer tenantId,
                                         @PathVariable("customerId") Integer customerId) throws Exception{
@@ -267,7 +267,7 @@ public class DeviceController extends BaseController {
     }
 
     //获取客户的所有设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/customerdevices/{tenantId}/{customerId}", params = {"limit"}, method = RequestMethod.GET)
     public TextPageData<Device> getDevicesByTenantIdAndCustomerId(
             @PathVariable("tenantId") Integer tenantId,
@@ -288,7 +288,7 @@ public class DeviceController extends BaseController {
 
 
     //获取站点下的所有设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/sitedevices/{tenantId}/{siteId}", params = {"limit"}, method = RequestMethod.GET)
     public TextPageData<Device> getDevicesByTenantIdAndSiteId(
             @PathVariable("tenantId") Integer tenantId,
@@ -308,7 +308,7 @@ public class DeviceController extends BaseController {
     }
 
     //分配设备到站点，即更新设备
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/assign/site", method = RequestMethod.POST)
     public String assignDeviceToSite(@RequestBody String device)  {
         try {
@@ -319,7 +319,7 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/{manufactuere}/{deviceType}/{model}/devices/", params = {"limit"}, method = RequestMethod.GET)
     public TextPageData<Device> getDevicesByTenantIdAndCustomerId(
             @PathVariable("manufactuere") String manufactuere,
@@ -342,7 +342,7 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/devices/{tenantId}", params = {"limit"}, method = RequestMethod.GET)
     public TextPageData<Device> getDevices(
             @PathVariable("tenantId") Integer tenantId,
@@ -360,7 +360,7 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/device/status/{tenantId}", method = RequestMethod.POST)
     public DeferredResult<ResponseEntity> getDeviceStatus(@RequestBody String devices, @PathVariable Integer tenantId){
         DeferredResult<ResponseEntity> res = new DeferredResult<>();
@@ -383,13 +383,13 @@ public class DeviceController extends BaseController {
         }
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('SYS_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('SYS_ADMIN')")
     @RequestMapping(value = "/devices/suspend/{tenantId}", method = RequestMethod.PUT)
     public void suspendDevices(@PathVariable("tenantId") Integer tenantId) throws Exception {
         deviceService.suspendedDeviceByTenantId(tenantId);
     }
 
-    @PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('SYS_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('SYS_ADMIN')")
     @RequestMapping(value = "/devices/activate/{tenantId}", method = RequestMethod.PUT)
     public void activateDevices(@PathVariable("tenantId") Integer tenantId) throws Exception {
         deviceService.activatedDeviceByTenantId(tenantId);

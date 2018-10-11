@@ -1,3 +1,4 @@
+/*
 package cn.edu.bupt.security;
 
 import cn.edu.bupt.security.model.Authority;
@@ -13,9 +14,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * Created by CZX on 2018/5/5.
- */
+ *//*
+
 public class UserTokenConverter extends DefaultUserAuthenticationConverter{
 
     final String USER_ID = "user_id";
@@ -53,3 +56,4 @@ public class UserTokenConverter extends DefaultUserAuthenticationConverter{
         throw new IllegalArgumentException("Authorities must be either a String or a Collection");
     }
 }
+*/

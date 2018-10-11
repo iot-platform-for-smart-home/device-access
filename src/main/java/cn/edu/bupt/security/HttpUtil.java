@@ -1,3 +1,4 @@
+/*
 package cn.edu.bupt.security;
 
 import cn.edu.bupt.security.model.Token;
@@ -12,10 +13,12 @@ import java.util.Base64;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * Created by Administrator on 2017/12/23.
  * 在启动的时候不能使用
- */
+ *//*
+
 @Component
 public class HttpUtil {
 
@@ -182,12 +185,14 @@ public class HttpUtil {
         return response.body().string();
     }
 
-    /**
+    */
+/**
      * 同步方法
      * @param request
      * @return
      * @throws IOException
-     */
+     *//*
+
     public static Response execute(Request request) throws IOException {
         return mOkHttpClient.newCall(request).execute() ;
     }
@@ -197,3 +202,4 @@ public class HttpUtil {
             .readTimeout(20, TimeUnit.SECONDS)
             .build();
 }
+*/

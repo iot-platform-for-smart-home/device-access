@@ -1,8 +1,7 @@
 package cn.edu.bupt.websocket;
 
 import cn.edu.bupt.pojo.Device;
-import cn.edu.bupt.security.HttpUtil;
-import cn.edu.bupt.service.DeviceService;
+import cn.edu.bupt.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -31,8 +29,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class WebSocketServer{
 
-    @Autowired
-    static DeviceService deviceService;
 
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
@@ -162,8 +158,8 @@ public class WebSocketServer{
         Request.Builder builder = new Request.Builder()
                 .url("http://39.104.189.84:30080/api/v1/deviceaccess/data/alllatestdata/"+deviceId);
 
-        String token = HttpUtil.getAccessToken();
-        builder.header("Authorization","Bearer "+token);
+        //String token = HttpUtil.getAccessToken();
+        //builder.header("Authorization","Bearer "+token);
 
         Request request = builder.build();
 
@@ -191,8 +187,8 @@ public class WebSocketServer{
         Request.Builder builder = new Request.Builder()
                 .url("http://39.104.189.84:30080/api/v1/deviceaccess/device/"+deviceId);
 
-        String token = HttpUtil.getAccessToken();
-        builder.header("Authorization","Bearer "+token);
+        //String token = HttpUtil.getAccessToken();
+        //builder.header("Authorization","Bearer "+token);
 
         Request request = builder.build();
 

@@ -12,7 +12,7 @@ import cn.edu.bupt.pojo.Device;
 import cn.edu.bupt.pojo.DeviceByGroupId;
 import cn.edu.bupt.pojo.DeviceCredentials;
 import cn.edu.bupt.pojo.Tenant;
-import cn.edu.bupt.security.HttpUtil;
+//import cn.edu.bupt.security.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.*;
 import okhttp3.*;
@@ -53,7 +53,7 @@ public class DeviceServiceImpl implements DeviceService, InitializingBean{
     @Autowired
     private DeviceDao deviceDao;
 
-    private HttpUtil httpUtil = new HttpUtil();
+    //private HttpUtil httpUtil = new HttpUtil();
 //
 //    @Autowired
 //    private TenantDao tenantDao;
@@ -415,18 +415,18 @@ public class DeviceServiceImpl implements DeviceService, InitializingBean{
                     @Override
                     public void call(Long aLong) {
                         try {
-                            List<Tenant> tenants= getTenants();
+                            //List<Tenant> tenants= getTenants();
                             TextPageData pageData;
-                            for (Tenant tenant: tenants){
-                                TextPageLink pageLink = new TextPageLink(1000, textSearch,idOffset==null?null:UUID.fromString(idOffset), textOffset);
-                                pageData = findDevices(tenant.getId() , pageLink);
-                                checkData(pageData);
-
-                                while(pageData.hasNext()) {
-                                    pageData = findDevices(tenant.getId() , pageData.getNextPageLink());
-                                    checkData(pageData);
-                                }
-                            }
+//                            for (Tenant tenant: tenants){
+//                                TextPageLink pageLink = new TextPageLink(1000, textSearch,idOffset==null?null:UUID.fromString(idOffset), textOffset);
+//                                pageData = findDevices(tenant.getId() , pageLink);
+//                                checkData(pageData);
+//
+//                                while(pageData.hasNext()) {
+//                                    pageData = findDevices(tenant.getId() , pageData.getNextPageLink());
+//                                    checkData(pageData);
+//                                }
+//                            }
                         }  catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -434,31 +434,31 @@ public class DeviceServiceImpl implements DeviceService, InitializingBean{
                 });
     }
 
-    private List<Tenant> getTenants() throws Exception {
-        //Gson gs = new Gson();
-        List<Tenant> tenants = new ArrayList<>();
-        int page = 0;
-
-        while(true) {
-            String response = httpUtil.sendGet("http://account:8400/api/v1/account/tenants?limit=1000&page="+page,null);
-
-            if (response!=null) {
-                JsonArray jsonArray = new JsonParser().parse(response).getAsJsonArray();
-
-                if(jsonArray.size()==0){
-                    return tenants;
-                }
-
-                for(JsonElement jsonElement:jsonArray){
-                    JsonObject jsonObject = jsonElement.getAsJsonObject();
-                    tenants.add(JSON.parseObject(jsonObject.toString(), Tenant.class));
-                }
-                page++;
-            } else {
-                throw new IOException("Unexpected code " + response);
-            }
-        }
-    }
+//    private List<Tenant> getTenants() throws Exception {
+//        //Gson gs = new Gson();
+//        List<Tenant> tenants = new ArrayList<>();
+//        int page = 0;
+//
+//        while(true) {
+//            String response = httpUtil.sendGet("http://account:8400/api/v1/account/tenants?limit=1000&page="+page,null);
+//
+//            if (response!=null) {
+//                JsonArray jsonArray = new JsonParser().parse(response).getAsJsonArray();
+//
+//                if(jsonArray.size()==0){
+//                    return tenants;
+//                }
+//
+//                for(JsonElement jsonElement:jsonArray){
+//                    JsonObject jsonObject = jsonElement.getAsJsonObject();
+//                    tenants.add(JSON.parseObject(jsonObject.toString(), Tenant.class));
+//                }
+//                page++;
+//            } else {
+//                throw new IOException("Unexpected code " + response);
+//            }
+//        }
+//    }
 
     public String sendMessage(Device device, String message){
         JsonObject jsonObject = new JsonObject();
