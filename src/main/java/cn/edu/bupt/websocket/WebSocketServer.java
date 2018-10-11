@@ -1,7 +1,6 @@
 package cn.edu.bupt.websocket;
 
 import cn.edu.bupt.pojo.Device;
-import cn.edu.bupt.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
