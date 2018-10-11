@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/deviceAccess.iml" filepath="$PROJECT_DIR$/deviceAccess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/device-access.iml" filepath="$PROJECT_DIR$/device-access.iml" />
     </modules>
   </component>
 </project>
