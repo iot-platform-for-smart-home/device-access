@@ -177,7 +177,7 @@ public class DeviceController extends BaseController {
 
     //@PreAuthorize("#oauth2.hasScope('all') OR hasAuthority('TENANT_ADMIN')")
     @RequestMapping(value = "/tenant/devices/{tenantId}", params = {"limit"}, method = RequestMethod.GET)
-    public TextPageData<Device> getTenantDevicesCount(
+    public TextPageData<Device> getTenantDevices(
             @PathVariable("tenantId") Integer tenantId,
             @RequestParam int limit,
             @RequestParam(required = false) String type,
@@ -186,11 +186,11 @@ public class DeviceController extends BaseController {
             @RequestParam(required = false) String textOffset) throws Exception {
         try {
             TextPageLink pageLink = new TextPageLink(limit, textSearch,idOffset==null?null:toUUID(idOffset), textOffset);
-            TextPageData<Device> ls = deviceService.findDevicesByTenantId(tenantId, pageLink);
+            /*TextPageData<Device> ls = deviceService.findDevicesByTenantId(tenantId, pageLink);
             TextPageLink pageLink1 = new TextPageLink(1,textSearch);
             Long count = deviceService.findDevicesCountWithTextSearch(tenantId,pageLink1);
-            System.out.println(count);
-            return ls;
+            System.out.println(count);*/
+            return checkNotNull(deviceService.findDevicesByTenantId(tenantId, pageLink));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

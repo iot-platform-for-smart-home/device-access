@@ -176,7 +176,7 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
 
     @Override
     public String getSearchTextSource() {
-        return getName();
+        return getNickname() != null ? getNickname() : getName();
     }
 
     public Integer getSiteId() {
