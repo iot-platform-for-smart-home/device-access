@@ -66,6 +66,9 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
     @Column(name  = DEVICE_LIFE_TIME_PROPERTY )
     private Long lifeTime;
 
+    @Column(name = DEVICE_NICKNAME_PROPERTY)
+    private String nickname;
+
 //    public Device(Device device) {
 //        this.id = id;
 //        this.tenantId = tenantId;
@@ -192,6 +195,14 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
         this.lifeTime = lifeTime;
     }
 
+    public String getNickname(){
+        return nickname;
+    }
+
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
@@ -221,6 +232,8 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
                 .append(siteId).append('\"');
         sb.append(",\"lifeTime\":\"")
                 .append(lifeTime).append('\"');
+        sb.append(",\"nickname\":\"")
+                .append(lifeTime).append('\"');
         sb.append('}');
         return sb.toString();
     }
@@ -246,6 +259,7 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
         if (model != null ? !model.equals(device.model) : device.model != null) return false;
         if (status != null ? !status.equals(device.status) : device.status != null) return false;
         if (location != null ? !location.equals(device.location) : device.location != null) return false;
+        if (nickname != null ? !nickname.equals(device.nickname) : device.nickname != null) return false;
         return siteId != null ? siteId.equals(device.siteId) : device.siteId == null;
     }
 
@@ -264,6 +278,7 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + (siteId != null ? siteId.hashCode() : 0);
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
         result = 31 * result + (int) (lifeTime ^ (lifeTime >>> 32));
         return result;
     }

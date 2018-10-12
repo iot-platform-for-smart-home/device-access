@@ -108,10 +108,10 @@ public class BaseController {
 
     public String onFail(String msg) {
         JsonObject InfoJson = new JsonObject() ;
-        InfoJson.addProperty("id", "");
-        InfoJson.addProperty("response_code", 1);
-        //InfoJson.addProperty("response_msg", msg);
-        InfoJson.addProperty("info", "名称重复，创建失败");
+//        InfoJson.addProperty("id", "");
+//        InfoJson.addProperty("response_code", 1);
+        InfoJson.addProperty("response_msg", msg);
+//        InfoJson.addProperty("info", "名称重复，创建失败");
         return InfoJson.toString() ;
     }
 
