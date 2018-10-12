@@ -233,7 +233,7 @@ public class Device extends SearchTextBased implements SearchTextEntity,Serializ
         sb.append(",\"lifeTime\":\"")
                 .append(lifeTime).append('\"');
         sb.append(",\"nickname\":\"")
-                .append(lifeTime).append('\"');
+                .append(nickname).append('\"');
         sb.append('}');
         return sb.toString();
     }
