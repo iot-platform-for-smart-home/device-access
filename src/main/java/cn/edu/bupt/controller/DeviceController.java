@@ -1,13 +1,11 @@
 package cn.edu.bupt.controller;
 
 import cn.edu.bupt.actor.service.FromServerMsgProcessor;
-import cn.edu.bupt.dao.exception.IOTErrorCode;
 import cn.edu.bupt.dao.exception.IOTException;
 import cn.edu.bupt.dao.page.TextPageData;
 import cn.edu.bupt.dao.page.TextPageLink;
 import cn.edu.bupt.message.BasicFromServerMsg;
 import cn.edu.bupt.pojo.Device;
-//import cn.edu.bupt.security.model.Authority;
 import cn.edu.bupt.utils.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonArray;
@@ -16,13 +14,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
@@ -393,6 +391,31 @@ public class DeviceController extends BaseController {
     @RequestMapping(value = "/devices/activate/{tenantId}", method = RequestMethod.PUT)
     public void activateDevices(@PathVariable("tenantId") Integer tenantId) throws Exception {
         deviceService.activatedDeviceByTenantId(tenantId);
+    }
+
+    //分配网关下所有设备包括网关自己
+    @RequestMapping(value = "/assignAll/{customerId}", method = RequestMethod.GET)
+    public void assignAllDevicesToCustomer(@PathVariable("customerId") Integer customerId, @RequestParam String gateway_user) throws Exception{
+        if(deviceService.findDeviceByTenantIdAndName(2, gateway_user).isPresent()){
+            Device parentDevice = deviceService.findDeviceByTenantIdAndName(2, gateway_user).get();
+            UUID pId = parentDevice.getId();
+            int gatewayCustomerId = parentDevice.getCustomerId();
+            if(gatewayCustomerId == 1){
+                deviceService.assignDeviceToCustomer(pId, customerId);
+            }
+            if(gatewayCustomerId == customerId){
+                List<Device> devices = deviceService.findDeviceByParentDeviceId(pId.toString(), new TextPageLink(255));
+                for(Device de : devices){
+                    if(de.getCustomerId() == 1){
+                        deviceService.assignDeviceToCustomer(de.getId(),customerId );
+                    }
+                }
+            }else {
+                throw new Exception("The gateway has been assigned!");
+            }
+        }else{
+            throw new Exception("Don't has such gateway!");
+        }
     }
 
 }
