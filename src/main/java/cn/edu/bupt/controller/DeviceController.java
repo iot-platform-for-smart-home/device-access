@@ -402,6 +402,7 @@ public class DeviceController extends BaseController {
             int gatewayCustomerId = parentDevice.getCustomerId();
             if(gatewayCustomerId == 1){
                 deviceService.assignDeviceToCustomer(pId, customerId);
+                gatewayCustomerId = customerId;
             }
             if(gatewayCustomerId == customerId){
                 List<Device> devices = deviceService.findDeviceByParentDeviceId(pId.toString(), new TextPageLink(255));
