@@ -307,7 +307,7 @@ public class DeviceController extends BaseController {
 
     //分配设备到站点，即更新设备
     //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
-    @RequestMapping(value = "/assign/site", method = RequestMethod.POST)
+/*    @RequestMapping(value = "/assign/site", method = RequestMethod.POST)
     public String assignDeviceToSite(@RequestBody String device)  {
         try {
             Device sitedevice = JSON.parseObject(device, Device.class);
@@ -315,7 +315,7 @@ public class DeviceController extends BaseController {
         } catch (Exception e) {
             return null;
         }
-    }
+    }*/
 
     //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")
     @RequestMapping(value = "/{manufactuere}/{deviceType}/{model}/devices/", params = {"limit"}, method = RequestMethod.GET)
@@ -407,9 +407,7 @@ public class DeviceController extends BaseController {
             if(gatewayCustomerId == customerId){
                 List<Device> devices = deviceService.findDeviceByParentDeviceId(pId.toString(), new TextPageLink(255));
                 for(Device de : devices){
-                    if(de.getCustomerId() == 1){
-                        deviceService.assignDeviceToCustomer(de.getId(),customerId );
-                    }
+                    deviceService.assignDeviceToCustomer(de.getId(),customerId );
                 }
             }else {
                 throw new Exception("The gateway has been assigned!");
