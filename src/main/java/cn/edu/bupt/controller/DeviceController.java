@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -412,6 +413,27 @@ public class DeviceController extends BaseController {
             }else {
                 throw new Exception("The gateway has been assigned!");
             }
+        }else{
+            throw new Exception("Don't has such gateway!");
+        }
+    }
+
+    @RequestMapping(value = "/unassign/{customerId}", method = RequestMethod.GET)
+    public void unassignGatewayAndDevice(@PathVariable("customerId") Integer customerId, @RequestParam String gateway_name) throws Exception{
+        if(deviceService.findDeviceByTenantIdAndName(2, gateway_name).isPresent()){
+            Device gateway = deviceService.findDeviceByTenantIdAndName(2, gateway_name).get();
+            UUID gId = gateway.getId();
+            int gatewayCustomerId = gateway.getCustomerId();
+            if(gatewayCustomerId == customerId){
+                deviceService.unassignDeviceFromCustomer(gId);
+                List<Device> devices = deviceService.findDeviceByParentDeviceId(gId.toString(), new TextPageLink(255));
+                for(Device de : devices){
+                    deviceService.unassignDeviceFromCustomer(de.getId());
+                }
+            }else{
+                throw new Exception("Don't has been authorized!");
+            }
+
         }else{
             throw new Exception("Don't has such gateway!");
         }
