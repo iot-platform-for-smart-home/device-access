@@ -197,6 +197,10 @@ public class DeviceActorMsgProcessor {
             for(Session session : actorSystemContext.getWebSocketServer().map.get(device.getId().toString()) )
                 actorSystemContext.getWebSocketServer().sendMessage(obj.toString(),session);
         }
+        if(actorSystemContext.getNewWebSocketServer().customerSessionMap.containsKey(device.getCustomerId())){
+            for(Session session: actorSystemContext.getNewWebSocketServer().customerSessionMap.get(device.getCustomerId()))
+                actorSystemContext.getNewWebSocketServer().sendMessage(obj.toString(),session);
+        }
 
         KafkaUtil.send("",obj.toString());
     }

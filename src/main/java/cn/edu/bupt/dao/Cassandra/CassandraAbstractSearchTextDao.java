@@ -78,18 +78,18 @@ public abstract class CassandraAbstractSearchTextDao<E extends SearchTextEntity>
         return resultSet.one().getLong(0);
     }
 
-        protected List<E> findPageWithIdDesc(String searchView, List<Clause> clauses, TextPageLink pageLink){
-            Select select = select().from(searchView);
-            Where query = select.where();
-            List<E> result = new ArrayList<>();
-            for (Clause clause : clauses) {
-                query.and(clause);
-            }
-            query.and(QueryBuilder.lt(ModelConstants.ID_PROPERTY, pageLink.getIdOffset()));
-            int limit = pageLink.getLimit();
-            query.limit(limit);
-            result.addAll(findListByStatement(query));
-            return result;
+    protected List<E> findPageWithIdDesc(String searchView, List<Clause> clauses, TextPageLink pageLink){
+        Select select = select().from(searchView);
+        Where query = select.where();
+        List<E> result = new ArrayList<>();
+        for (Clause clause : clauses) {
+            query.and(clause);
         }
+        query.and(QueryBuilder.lt(ModelConstants.ID_PROPERTY, pageLink.getIdOffset()));
+        int limit = pageLink.getLimit();
+        query.limit(limit);
+        result.addAll(findListByStatement(query));
+        return result;
+    }
 }
 

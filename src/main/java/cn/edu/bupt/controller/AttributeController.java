@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/deviceaccess")
-public class AttributeController extends BaseController {
+public class  AttributeController extends BaseController {
 
     //通过设备ID获取全部属性
     //@PreAuthorize("#oauth2.hasScope('all') OR hasAnyAuthority('TENANT_ADMIN', 'CUSTOMER_USER')")

@@ -3,6 +3,7 @@ package cn.edu.bupt.actor.service;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import cn.edu.bupt.service.*;
+import cn.edu.bupt.websocket.NewWebSocketServer;
 import cn.edu.bupt.websocket.WebSocketServer;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -37,6 +38,9 @@ public class ActorSystemContext {
 
     @Autowired
     @Getter private WebSocketServer webSocketServer;
+
+    @Autowired
+    @Getter private NewWebSocketServer newWebSocketServer;
 
 //    @Autowired
 //    @Getter private TenantService tenantService;
