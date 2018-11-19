@@ -9,5 +9,8 @@
         <module name="device-access" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="device-access" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

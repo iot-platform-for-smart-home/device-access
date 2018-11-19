@@ -197,8 +197,8 @@ public class DeviceActorMsgProcessor {
             for(Session session : actorSystemContext.getWebSocketServer().map.get(device.getId().toString()) )
                 actorSystemContext.getWebSocketServer().sendMessage(obj.toString(),session);
         }
-        if(actorSystemContext.getNewWebSocketServer().customerSessionMap.containsKey(device.getCustomerId())){
-            for(Session session: actorSystemContext.getNewWebSocketServer().customerSessionMap.get(device.getCustomerId()))
+        if(actorSystemContext.getNewWebSocketServer().gatewaySessionMap.containsKey(device.getParentDeviceId()) && !device.getDeviceType().equals("temperature") && !device.getDeviceType().equals("Gateway") && !device.getDeviceType().equals("PM2.5")){
+            for(Session session: actorSystemContext.getNewWebSocketServer().gatewaySessionMap.get(device.getParentDeviceId()))
                 actorSystemContext.getNewWebSocketServer().sendMessage(obj.toString(),session);
         }
 

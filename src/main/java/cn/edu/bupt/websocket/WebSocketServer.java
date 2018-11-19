@@ -41,7 +41,7 @@ public class WebSocketServer /*extends WebSocketBaseServer*/{
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
 
-    public  String deviceId = null;
+    public String deviceId = null;
     //public static Set<Session> sessions= new HashSet<>();
     public static Map<String,Set<Session>> map = new ConcurrentHashMap<>();
 
@@ -223,7 +223,7 @@ public class WebSocketServer /*extends WebSocketBaseServer*/{
 
     }
 
-    public JsonObject encodeJson (Device device, String data){
+    public static JsonObject encodeJson (Device device, String data){
         JsonObject obj =  new JsonObject();
         obj.addProperty("deviceId",device.getId().toString());
         obj.addProperty("tenantId",device.getTenantId());
