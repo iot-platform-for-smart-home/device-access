@@ -98,32 +98,37 @@ public class WebSocketServer /*extends WebSocketBaseServer*/{
     public void onMessage(String message, Session session) throws IOException, ExecutionException, InterruptedException {
         log.info("来自客户端的消息:" + message);
 
-        JsonObject jsonObj = (JsonObject)new JsonParser().parse(message);
-        String deviceId = jsonObj.get("deviceId").getAsString();
-        this.deviceId = deviceId;
+        if(message.equals("@heart")){
+            //sendMessage("@heart",this.session);
+        }else{
+            JsonObject jsonObj = (JsonObject)new JsonParser().parse(message);
+            String deviceId = jsonObj.get("deviceId").getAsString();
+            this.deviceId = deviceId;
 
 /*        String data = sendGETAllData(this.deviceId);
         String deviceStr = getDeviceId(this.deviceId);*/
 
-        ListenableFuture<List<TsKvEntry>> tskventry = baseTimeseriesStaticService.findAllLatest(toUUID(deviceId));
-        List<TsKvEntry> ls = tskventry.get();
-        Gson gson = new Gson();
-        String data = gson.toJson(ls);
+            ListenableFuture<List<TsKvEntry>> tskventry = baseTimeseriesStaticService.findAllLatest(toUUID(deviceId));
+            List<TsKvEntry> ls = tskventry.get();
+            Gson gson = new Gson();
+            String data = gson.toJson(ls);
 
-        //Gson gson = new Gson();
-        /*Device device = JSON.parseObject(deviceStr, Device.class);*/
-        Device device = deviceStaticService.findDeviceById(toUUID(this.deviceId));
+            //Gson gson = new Gson();
+            /*Device device = JSON.parseObject(deviceStr, Device.class);*/
+            Device device = deviceStaticService.findDeviceById(toUUID(this.deviceId));
 
-        JsonObject jsonObject =  encodeJson(device,data);
-        sendMessage(jsonObject.toString(),this.session);
+            JsonObject jsonObject =  encodeJson(device,data);
+            sendMessage(jsonObject.toString(),this.session);
 
-        if(map.containsKey(deviceId)){
-            map.get(deviceId).add(session);
-        }else{
-            Set<Session> s = new HashSet<>();
-            s.add(this.session);
-            map.put(deviceId,s);
+            if(map.containsKey(deviceId)){
+                map.get(deviceId).add(session);
+            }else{
+                Set<Session> s = new HashSet<>();
+                s.add(this.session);
+                map.put(deviceId,s);
+            }
         }
+
 //        getSubscribeDevices().add(deviceId);
 //        System.out.println(getSubscribeDevices());
         //群发消息

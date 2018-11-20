@@ -89,35 +89,39 @@ public class NewWebSocketServer{
     public void onMessage(String message, Session session)throws Exception{
         logger.info("客户端消息: " + message);
 
-        // 获取 customerId
-        JsonObject jsonObj = (JsonObject)new JsonParser().parse(message);
-        String gatewayId= jsonObj.get("gatewayId").getAsString();
-        this.gatewayId = gatewayId;
+        if(message.equals("@heart")){
+            //sendMessage("@heart",this.session);
+        }else{
+            // 获取 customerId
+            JsonObject jsonObj = (JsonObject)new JsonParser().parse(message);
+            String gatewayId= jsonObj.get("gatewayId").getAsString();
+            this.gatewayId = gatewayId;
 //        for(int i = 0; i < customerIdArray.size(); i++){
 //            customerIdList.add(customerIdArray.get(i).getAsInt());
 //        }
-        // 查数据库设备信息
-        TextPageLink pageLink = new TextPageLink(1000, null, null, null);
-        List<Device> devices = deviceStaticService.findDeviceByParentDeviceId(gatewayId, pageLink);
-        // 遍历查询设备最新数据
-        for(Device device:devices){
-            if(!device.getDeviceType().equals("temperature") && !device.getDeviceType().equals("Gateway") && !device.getDeviceType().equals("PM2.5")){
-                ListenableFuture<List<TsKvEntry>> tskventry = baseTimeseriesStaticService.findAllLatest(device.getId());
-                List<TsKvEntry> ls = tskventry.get();
-                Gson gson = new Gson();
-                String data = gson.toJson(ls);
-                JsonObject jsonObject =  WebSocketServer.encodeJson(device,data);
-                sendMessage(jsonObject.toString(),this.session);
+            // 查数据库设备信息
+            TextPageLink pageLink = new TextPageLink(1000, null, null, null);
+            List<Device> devices = deviceStaticService.findDeviceByParentDeviceId(gatewayId, pageLink);
+            // 遍历查询设备最新数据
+            for(Device device:devices){
+                if(!device.getDeviceType().equals("temperature") && !device.getDeviceType().equals("Gateway") && !device.getDeviceType().equals("PM2.5")){
+                    ListenableFuture<List<TsKvEntry>> tskventry = baseTimeseriesStaticService.findAllLatest(device.getId());
+                    List<TsKvEntry> ls = tskventry.get();
+                    Gson gson = new Gson();
+                    String data = gson.toJson(ls);
+                    JsonObject jsonObject =  WebSocketServer.encodeJson(device,data);
+                    sendMessage(jsonObject.toString(),this.session);
+                }
             }
-        }
 
-        // 保存 Session
-        if(gatewaySessionMap.containsKey(gatewayId)){
-            gatewaySessionMap.get(gatewayId).add(session);
-        }else{
-            Set<Session> s = new HashSet<>();
-            s.add(this.session);
-            gatewaySessionMap.put(gatewayId,s);
+            // 保存 Session
+            if(gatewaySessionMap.containsKey(gatewayId)){
+                gatewaySessionMap.get(gatewayId).add(session);
+            }else{
+                Set<Session> s = new HashSet<>();
+                s.add(this.session);
+                gatewaySessionMap.put(gatewayId,s);
+            }
         }
     }
 
