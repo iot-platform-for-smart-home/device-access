@@ -162,6 +162,7 @@ public class DeviceActorMsgProcessor {
         JsonObject obj =  new JsonObject();
         obj.addProperty("deviceId",device.getId().toString());
         obj.addProperty("tenantId",device.getTenantId());
+        obj.addProperty("customerId",device.getCustomerId());
         obj.addProperty("name",device.getName());
         obj.addProperty("manufacture",device.getManufacture());
         obj.addProperty("deviceType",device.getDeviceType());
