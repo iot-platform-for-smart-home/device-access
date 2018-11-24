@@ -104,7 +104,7 @@ public class NewWebSocketServer{
             List<Device> devices = deviceStaticService.findDeviceByParentDeviceId(gatewayId, pageLink);
             // 遍历查询设备最新数据
             for(Device device:devices){
-                if(!device.getDeviceType().equals("temperature") && !device.getDeviceType().equals("Gateway") && !device.getDeviceType().equals("PM2.5")){
+                if(!device.getDeviceType().equals("temperature") && !device.getDeviceType().equals("Gateway") && !device.getDeviceType().equals("PM2.5") && !device.getDeviceType().equals("lightSensor")){
                     ListenableFuture<List<TsKvEntry>> tskventry = baseTimeseriesStaticService.findAllLatest(device.getId());
                     List<TsKvEntry> ls = tskventry.get();
                     Gson gson = new Gson();
