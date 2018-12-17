@@ -95,6 +95,14 @@ public class CassandraDeviceDao extends CassandraAbstractSearchTextDao<Device> i
     }
 
     @Override
+    public List<Device> findDevicesByDeviceType(String deviceType, TextPageLink pageLink)
+    {
+        List<Device> devices = findPageWithTextSearch(DEVICE_BY_MANUFACTURE_AND_DEVICE_TYPE_AND_MODEL,
+                Arrays.asList(eq(DEVICE_DEVICE_TYPE_PROPERTY, deviceType)),pageLink);
+        return devices;
+    }
+
+    @Override
     public Optional<Device> findDeviceByTenantIdAndName(Integer tenantId, String deviceName) {
         Select select = select().from(DEVICE_BY_TENANT_AND_NAME_VIEW_NAME);
         Select.Where query = select.where();
