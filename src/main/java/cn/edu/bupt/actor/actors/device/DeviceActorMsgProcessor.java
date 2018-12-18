@@ -162,7 +162,7 @@ public class DeviceActorMsgProcessor {
         JsonObject obj =  new JsonObject();
         obj.addProperty("deviceId",device.getId().toString());
         obj.addProperty("tenantId",device.getTenantId());
-        obj.addProperty("customerId",device.getCustomerId());
+        obj.addProperty("gatewayId",device.getParentDeviceId());
         obj.addProperty("name",device.getName());
         obj.addProperty("manufacture",device.getManufacture());
         obj.addProperty("deviceType",device.getDeviceType());
@@ -203,7 +203,10 @@ public class DeviceActorMsgProcessor {
                 actorSystemContext.getNewWebSocketServer().sendMessage(obj.toString(),session);
         }
 
-        KafkaUtil.send("",obj.toString());
+        if(device.getDeviceType().equals("IASZone") || device.getDeviceType().equals("PM2.5") || device.getDeviceType().equals("lightSensor") || device.getDeviceType().equals("temperature")){
+            KafkaUtil.send("",obj.toString());
+        }
+
     }
 
 
