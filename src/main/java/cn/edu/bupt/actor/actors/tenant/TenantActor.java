@@ -40,7 +40,7 @@ public class TenantActor extends ContextAwareActor {
             ActorRef ref = deviceActors.get(((BasicToDeviceActorSessionMsg)msg).getDeviceId());
             if(ref != null){
                 //TODO 延时时间改为通过配置文件注入
-                scheduleMsgWithDelay(msg,60000,ref);
+                scheduleMsgWithDelay(msg,0,ref);
             }
         }else if(msg instanceof  DeviceTerminationMsg){
             ActorRef ref =  deviceActors.remove(((DeviceTerminationMsg)msg).getDeviceId());
