@@ -244,6 +244,14 @@ public class DeviceServiceImpl implements DeviceService, InitializingBean{
         return new TextPageData<>(devices, pageLink);
     }
 
+    @Override
+    public TextPageData<Device> findDevicesByDeviceType(String deviceType, TextPageLink pageLink){
+        validateString(deviceType,INCORRECT_DEVICE_TYPE);
+        validatePageLink(pageLink, INCORRECT_PAGE_LINK + pageLink);
+        List<Device> devices = deviceDao.findDevicesByDeviceType(deviceType,pageLink);
+        return new TextPageData<>(devices, pageLink);
+    }
+
 
     @Override
     public void unassignCustomerDevices(Integer tenantId, Integer customerId) {
