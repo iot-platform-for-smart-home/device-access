@@ -93,6 +93,7 @@ public class ModelConstants {
     public static final String DEVICE_BY_TENANT_AND_NAME_VIEW_NAME = "device_by_tenant_and_name";
     public static final String DEVICE_TYPES_BY_TENANT_VIEW_NAME = "device_types_by_tenant";
     public static final String DEVICE_BY_MANUFACTURE_AND_DEVICE_TYPE_AND_MODEL="device_by_manufacture_and_device_type_and_model";
+    public static final String DEVICE_BY_DEVICE_TYPE_AND_MODEL="device_by_device_type_and_model";
     public static final String DEVICE_BY_TENANT_AND_SITE = "device_by_tenant_and_site";
 
     /**

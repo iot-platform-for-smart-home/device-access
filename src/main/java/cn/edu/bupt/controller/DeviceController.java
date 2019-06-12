@@ -439,4 +439,17 @@ public class DeviceController extends BaseController {
         }
     }
 
+
+    @RequestMapping(value = "/getAllGateways", method = RequestMethod.GET)
+    TextPageData<Device> getAllGateways(){
+        try {
+            TextPageData<Device> devices = deviceService.findDevicesByDeviceType("Gateway", new TextPageLink(1000));
+            return devices;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }
